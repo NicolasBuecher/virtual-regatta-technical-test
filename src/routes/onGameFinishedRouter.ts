@@ -1,5 +1,5 @@
 import express from "express";
-import postOnGameFinishedController from "../controllers/postOnGameFinishedController";
+import postOnGameFinishedController from "../controllers/postOnGameFinishedController/postOnGameFinishedController";
 
 
 const onGameFinishedRouter = express.Router();
