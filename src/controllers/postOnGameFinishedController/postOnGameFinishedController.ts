@@ -15,17 +15,15 @@ function postOnGameFinishedController(req: Request, res: Response) {
 
     const result = getGameResult(game);
 
-    // stringify result and return it
+    // TODO: stringify result
+    res.status(200).json({
+      message: result,
+    });
   } catch (error) {
     res.status(400).json({
       message: error.message,
     });
-    return;
   }
-
-  res.status(200).json({
-    message: "OK",
-  });
 }
 
 export default postOnGameFinishedController;

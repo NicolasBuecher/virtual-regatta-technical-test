@@ -16,6 +16,10 @@ function getGameResult(game: Game): Result {
     [players[2], 0],
     [players[3], 0],
   ]);
+  const teams = [
+    [players[0], players[2]],
+    [players[1], players[3]],
+  ];
 
   // First player is the one at north
   tricks.forEach((trick, i) => {
@@ -36,9 +40,37 @@ function getGameResult(game: Game): Result {
     players = players.slice(winnerPosition).concat(players.slice(0, winnerPosition));
   });
 
+  // Determine winning team
+  const teamsPoints = teams
+    .map(team => playersPointsMap.get(team[0]) + playersPointsMap.get(team[1]));
+
+
+  // At this point it's not clean
+
+  const resultPlayers: string[] = [];
+  function fillResultPlayers(teamIndex: number) {
+    const player1 = teams[teamIndex][0];
+    const player2 = teams[teamIndex][1];
+    if (playersPointsMap.get(player2) > playersPointsMap.get(player1)) {
+      resultPlayers.push(player2, player1);
+    } else {
+      resultPlayers.push(player1, player2);
+    }
+  }
+
+  if (teamsPoints[1] > teamsPoints[0]) {
+    // West/East team won
+    fillResultPlayers(1);
+    fillResultPlayers(0);
+  } else {
+    // North/South team won or Equality
+    fillResultPlayers(0);
+    fillResultPlayers(1);
+  }
+
   return {
-    points: [0, 0],
-    players,
+    points: teamsPoints.sort((a, b) => b - a),
+    players: resultPlayers,
   };
 }
 
