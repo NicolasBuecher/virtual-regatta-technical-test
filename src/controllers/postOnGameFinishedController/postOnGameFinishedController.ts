@@ -15,9 +15,8 @@ function postOnGameFinishedController(req: Request, res: Response) {
 
     const result = getGameResult(game);
 
-    // TODO: stringify result
     res.status(200).json({
-      message: result,
+      message: `${result.points.join("-")}#${result.players.join(",")}`,
     });
   } catch (error) {
     res.status(400).json({
