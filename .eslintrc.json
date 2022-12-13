@@ -1,0 +1,203 @@
+{
+    "root": true,
+    "env": {
+        "node": true,
+        "es2021": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "airbnb-base",
+        "plugin:import/typescript",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "plugins": [
+        "@typescript-eslint",
+        "import"
+    ],
+    "settings": {
+        "import/resolver": {
+            "typescript": true,
+            "node": true
+        }
+    },
+    "rules": {
+        // Enforce the use of brackets except for one argument
+        // https://eslint.org/docs/rules/arrow-parens
+        "arrow-parens": ["error", "as-needed"],
+
+        // Enforce the use of curly brackets even for one-line statements
+        // https://eslint.org/docs/rules/curly
+        "curly": ["error", "all"],
+
+        // Require line breaks inside function parentheses if there are line breaks between parameters
+        // https://eslint.org/docs/rules/function-paren-newline
+        "function-paren-newline": ["error", "multiline"],
+
+        // Ensure consistent use of file extension within import path
+        // Fix the error "Missing file extension for..."
+        // https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/extensions.md
+        "import/extensions": [
+            "error",
+            "ignorePackages",
+            {
+                "js": "never",
+                "ts": "never"
+            }
+        ],
+
+        // Require two newlines after the last import/require in a group
+        // TODO: Update this rule with `considerComments` option when it will be released
+        // https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/newline-after-import.md
+        "import/newline-after-import": ["error", { "count": 2 }],
+
+        // Enforce a convention in module import order
+        // https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/order.md
+        "import/order": ["error", {
+            "newlines-between": "never",
+            "groups": [
+                "builtin",
+                "external",
+                "internal",
+                "parent",
+                "sibling",
+                "index"
+            ],
+            "alphabetize": {
+                "order": "asc",
+                "caseInsensitive": false
+            }
+        }],
+
+        // Enforce empty lines between class members, except for one liners
+        // https://eslint.org/docs/rules/lines-between-class-members
+        "lines-between-class-members": ["error", "always", {
+            "exceptAfterSingleLine": true
+        }],
+
+        // Enforce the maximum depth callbacks that can be nested
+        // https://eslint.org/docs/latest/rules/max-nested-callbacks
+        "max-nested-callbacks" : ["error", 4],
+
+        // Enable the use of console statements (recommended in node environment)
+        // See https://eslint.org/docs/rules/no-console#when-not-to-use-it
+        "no-console": "off",
+
+        // Disallow use of constant expressions in conditions
+        // https://eslint.org/docs/rules/no-constant-condition
+        "no-constant-condition": "error",
+
+        // Enforce the use of explicit constants instead of meaningless numbers
+        // https://eslint.org/docs/rules/no-magic-numbers
+        "no-magic-numbers": ["error", {
+            "ignore": [-1, 0, 1, 2],
+            "ignoreArrayIndexes": true,
+            "enforceConst": true,
+            "detectObjects": false
+        }],
+
+        // Allow maximum 2 empty lines
+        // https://eslint.org/docs/rules/no-multiple-empty-lines
+        "no-multiple-empty-lines": ["error", {
+            "max": 2,
+            "maxBOF": 0,
+            "maxEOF": 0
+        }],
+
+        // Disallow function parameter reassignment but allow function paramater properties reassignment
+        // https://eslint.org/docs/rules/no-param-reassign.html
+        "no-param-reassign": ["error", { "props": false }],
+
+        // Allow use of unary operators ++ and --
+        // http://eslint.org/docs/rules/no-plusplus
+        "no-plusplus" : "off",
+
+        // Disallow specified names in exports
+        // https://eslint.org/docs/rules/no-restricted-exports
+        "no-restricted-exports": ["error", {
+            "restrictedNamedExports": [
+                "then"
+            ]
+        }],
+
+        // Disallow some object properties and avoid typos
+        // https://eslint.org/docs/rules/no-restricted-properties
+        "no-restricted-properties": ["error", {
+            "object": "arguments",
+            "property": "callee",
+            "message": "arguments.callee is deprecated"
+        }, {
+            "object": "global",
+            "property": "isFinite",
+            "message": "Please use Number.isFinite instead"
+        }, {
+            "object": "self",
+            "property": "isFinite",
+            "message": "Please use Number.isFinite instead"
+        }, {
+            "object": "window",
+            "property": "isFinite",
+            "message": "Please use Number.isFinite instead"
+        }, {
+            "object": "global",
+            "property": "isNaN",
+            "message": "Please use Number.isNaN instead"
+        }, {
+            "object": "self",
+            "property": "isNaN",
+            "message": "Please use Number.isNaN instead"
+        }, {
+            "object": "window",
+            "property": "isNaN",
+            "message": "Please use Number.isNaN instead"
+        }, {
+            "property": "__defineGetter__",
+            "message": "Please use Object.defineProperty instead."
+        }, {
+            "property": "__defineSetter__",
+            "message": "Please use Object.defineProperty instead."
+        }, {
+            "object": "Math",
+            "property": "pow",
+            "message": "Use the exponentiation operator (**) instead."
+        }, {
+            "property" : "lenght",
+            "message" : "'lenght' might be a typo."
+        }],
+
+        // Disallow padding within blocks and switches but enforce it in classes
+        // https://eslint.org/docs/latest/rules/padded-blocks
+        "padded-blocks": ["error", {
+            "blocks": "never",
+            "classes": "always",
+            "switches": "never"
+        }, {
+            "allowSingleLineBlocks": true
+        }],
+
+        // Enforce destructuring from objects
+        // http://eslint.org/docs/rules/prefer-destructuring
+        "prefer-destructuring": ["error", {
+            "VariableDeclarator" : {
+                "array": false,
+                "object": true
+            },
+            "AssignmentExpression" : {
+                "array": false,
+                "object": false
+            }
+        }, {
+            "enforceForRenamedProperties": false
+        }],
+
+        // Enforce the use of double quotes
+        // See http://stackoverflow.com/a/18041188/1480391
+        // https://eslint.org/docs/rules/quotes
+        "quotes": ["error", "double", { "avoidEscape": true }]
+        
+    }
+}
