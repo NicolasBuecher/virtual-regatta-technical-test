@@ -1,5 +1,9 @@
 # Virtual Regatta technical test
 
+To build this project, run `npm run build`.
+To run this project, run `npm run start`.
+Nothing is done to deploy this project.
+
 You will build an amazing card game inspired by the Bridge but with simplified rules. You will have to build the code to detect game winners.
 
 You are free to use any language and framework but you must be compliant to AWS. You must provide everything to build, start and deploy your project.
