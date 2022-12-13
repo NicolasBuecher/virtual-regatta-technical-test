@@ -12,7 +12,7 @@ const VALUE_POINTS_MAP: Record<Value, number> = {
   9: 8,
   T: 9,
   J: 10,
-  D: 11,
+  Q: 11,
   K: 12,
   A: 13,
 };
