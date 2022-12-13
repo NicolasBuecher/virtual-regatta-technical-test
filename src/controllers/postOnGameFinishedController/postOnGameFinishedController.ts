@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import getGameResult from "./getGameResult/getGameResult";
 import parseGame from "./parseGame/parseGame";
 
 
@@ -11,6 +12,10 @@ function postOnGameFinishedController(req: Request, res: Response) {
 
   try {
     const game = parseGame(req.body.game);
+
+    const result = getGameResult(game);
+
+    // stringify result and return it
   } catch (error) {
     res.status(400).json({
       message: error.message,

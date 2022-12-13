@@ -7,3 +7,10 @@ export type Game = {
   players: string[]
 }
 
+export type Trick = [Card, Card, Card, Card];
+export type Value = "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "T" | "J" | "D" | "K" | "A";
+
+export type Result = {
+  points: number[],
+  players: string[]
+}
